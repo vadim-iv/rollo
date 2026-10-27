@@ -1,17 +1,8 @@
-import { Budget } from '@/generated/prisma/client'
 import { getAuthUser } from '@/lib/auth-user'
 import { prisma } from '@/lib/prisma'
-import { createBudgetSchema } from '@/lib/validations/budget'
+import { serializeBudget } from '@/utils/budget.utils'
+import { createBudgetSchema } from '@/validations/budget.validations'
 import { NextResponse } from 'next/server'
-
-const serializeBudget = (budget: Budget) => {
-	return {
-		...budget,
-		amount: budget.amount.toString(),
-		startDate: budget.startDate.toISOString().slice(0, 10),
-		endDate: budget.endDate.toISOString().slice(0, 10)
-	}
-}
 
 export async function GET() {
 	try {
@@ -69,7 +60,7 @@ export async function POST(request: Request) {
 		try {
 			body = await request.json()
 		} catch (error) {
-            console.warn('Failed to parse JSON body:', error)
+			console.warn('Failed to parse JSON body:', error)
 
 			return NextResponse.json(
 				{
