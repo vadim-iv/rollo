@@ -26,7 +26,7 @@ async function LoginSuspenseContent() {
 		redirect('/')
 	}
 	return (
-		<div className='h-full flex flex-col items-center justify-end relative border border-black'>
+		<div className='h-full flex flex-col items-center justify-end relative border'>
 			<div className='text-center max-w-14 w-full'>
 				<h2 className='font-semibold text-2xl text-primary-text'>Rollo</h2>
 				<p className='mt-0.5 font-normal text-base text-secondary-text'>
