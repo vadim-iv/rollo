@@ -23,7 +23,7 @@ export function ActionTextButton({
 			className={
 				cn(
 					'h-3.5 w-full hover:bg-accent-dark transition-colors duration-300 rounded-2xl text-surface text-xl font-semibold flex items-center justify-center outline-0 ring-0',
-					isDirty ? 'bg-accent-dark' : 'bg-accent',
+					isDirty ? 'bg-accent' : 'bg-accent-dark',
 					className
 				)
 			}
