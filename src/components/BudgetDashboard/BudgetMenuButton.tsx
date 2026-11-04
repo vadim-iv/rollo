@@ -72,7 +72,7 @@ export function BudgetMenuButton({ budgetId }: IBudgetMenuButton) {
 						>
 							<button
 								type='button'
-								className='w-full rounded-t-xl rounded-b-sm bg-border/50 px-1 py-0.5 text-left text-base font-semibold text-primary-text transition-colors duration-300 hover:bg-border/75'
+								className='w-full rounded-t-xl rounded-b-sm bg-border/50 px-1 py-1 text-left text-base font-semibold text-primary-text transition-colors duration-300 hover:bg-border/75'
 								onClick={() => {
 									setIsMenuOpen(false)
 									router.push(PAGES.getEditBudgetUrl(budgetId))
@@ -83,7 +83,7 @@ export function BudgetMenuButton({ budgetId }: IBudgetMenuButton) {
 							</button>
 							<button
 								type='button'
-								className='w-full rounded-b-xl rounded-t-sm bg-error/10 px-1 py-0.5 text-left text-base font-semibold text-error transition-colors duration-300 hover:bg-error/20'
+								className='w-full rounded-b-xl rounded-t-sm bg-error/10 px-1 py-1 text-left text-base font-semibold text-error transition-colors duration-300 hover:bg-error/20'
 								onClick={() => {
 									setIsMenuOpen(false)
 									setIsDeleteDialogOpen(true)
