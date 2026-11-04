@@ -9,7 +9,6 @@ import { InputError } from '@/components/shared/InputError'
 import { ActionTextButton } from '@/components/shared/ActionTextButton'
 import { useSaveSpending } from '@/hooks/budgets/spendings/useSaveSpending'
 import { useInitialSpendingData } from '@/hooks/budgets/spendings/useInitialSpendingData'
-import { useEffect } from 'react'
 
 interface ISpendingBottomSheet {
 	budgetId: string
