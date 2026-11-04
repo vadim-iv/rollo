@@ -16,8 +16,10 @@ export function BudgetCard({ budget }: IBudgetCard) {
 
 	const daysLeft = Math.ceil((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
 
-	const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1
-	const progress = totalDays > 0 ? Math.max(0, Math.min(((totalDays - daysLeft) / totalDays) * 100, 100)) : 0
+	const totalDays =
+		Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1
+	const progress =
+		totalDays > 0 ? Math.max(0, Math.min(((totalDays - daysLeft) / totalDays) * 100, 100)) : 0
 
 	const statusText =
 		daysUntilStart > 0
@@ -41,7 +43,10 @@ export function BudgetCard({ budget }: IBudgetCard) {
 				<p className='text-secondary-text font-normal text-sm mt-1'>{statusText}</p>
 
 				<div className='w-full h-0.25 bg-accent-dark rounded-full mt-0.5 overflow-hidden'>
-					<div className='h-0.25 bg-accent rounded-full' style={{ width: `${progress}%` }} />
+					<div
+						className='h-0.25 bg-accent rounded-full'
+						style={{ transform: `scaleX(${progress}%)` }}
+					/>
 				</div>
 			</div>
 		</Link>
