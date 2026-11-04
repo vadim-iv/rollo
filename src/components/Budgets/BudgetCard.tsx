@@ -16,8 +16,8 @@ export function BudgetCard({ budget }: IBudgetCard) {
 
 	const daysLeft = Math.ceil((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
 
-	const totalDays = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
-	const progress = Math.max(0, Math.min(((totalDays - daysLeft) / totalDays) * 100, 100))
+	const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1
+	const progress = totalDays > 0 ? Math.max(0, Math.min(((totalDays - daysLeft) / totalDays) * 100, 100)) : 0
 
 	const statusText =
 		daysUntilStart > 0
