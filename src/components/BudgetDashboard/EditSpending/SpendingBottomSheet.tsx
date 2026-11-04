@@ -81,7 +81,7 @@ export function SpendingBottomSheet({
 				exit={{ y: '100%' }}
 				transition={{ duration: 0.3, ease: 'easeInOut' }}
 			>
-				<div className="absolute bg-surface h-dvh top-full left-0 right-0"/>
+				<div className="fixed bg-surface h-dvh top-full left-0 right-0"/>
 				<div>
 					<p className='text-2xl font-semibold text-primary-text'>Edit Spending</p>
 					<p className='mt-0.25 text-secondary-text text-base font-semibold'>

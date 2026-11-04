@@ -61,7 +61,7 @@ export function HistoryBottomSheet({ budgetId, days, currency, setIsBottomSheetO
 				transition={{ duration: 0.3, ease: 'easeInOut' }}
 				onClick={() => setIsBottomSheetOpen(false)}
 			/>
-			<div className="absolute bg-surface h-dvh top-full left-0 right-0"/>
+			<div className="fixed bg-surface h-dvh top-full left-0 right-0"/>
 			<motion.div
 				className='bg-surface z-60 w-full max-h-45 h-full rounded-t-4xl border border-border px-2 pt-3 pb-4 flex flex-col justify-between'
 				initial={{ y: '100%' }}

@@ -107,12 +107,12 @@ export function LoginContent() {
 	return (
 		<>
 			<motion.div
-				className='absolute left-1/2 -translate-x-1/2 z-50'
+				className='fixed left-1/2 -translate-x-1/2 z-50'
 				initial={{
-					bottom: '50%',
+					bottom: '50dvh',
 				}}
 				animate={{
-					bottom: '87.5%',
+					bottom: '75dvh',
 				}}
 				transition={{
 					delay: 2,
@@ -131,7 +131,7 @@ export function LoginContent() {
 			</motion.div>
 
 			<motion.div
-				className='flex flex-col h-[90%] shadow-box-up border border-border absolute -bottom-4 -left-2 -right-2 bg-surface px-2 pt-6 pb-4  rounded-t-4xl'
+				className='flex flex-col h-[70dvh] shadow-box-up border border-border fixed bottom-0 left-0 right-0 bg-surface px-2 pt-6 pb-4  rounded-t-4xl'
 				initial={{ y: '100dvh' }}
 				animate={{ y: 0 }}
 				transition={{
@@ -140,7 +140,7 @@ export function LoginContent() {
 					ease: [0.1, 0, 0.2, 1]
 				}}
 			>
-				{/* <div className="fixed bg-surface h-dvh top-full left-0 right-0"/> */}
+				<div className="fixed bg-surface h-dvh top-full left-0 right-0"/>
 				<h1 className='font-semibold text-primary-text text-[2rem]'>
 					Welcome to <span className='text-accent'>Rollo</span>
 				</h1>
