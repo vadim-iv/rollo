@@ -9,6 +9,7 @@ import { InputError } from '@/components/shared/InputError'
 import { ActionTextButton } from '@/components/shared/ActionTextButton'
 import { useSaveSpending } from '@/hooks/budgets/spendings/useSaveSpending'
 import { useInitialSpendingData } from '@/hooks/budgets/spendings/useInitialSpendingData'
+import { useEffect } from 'react'
 
 interface ISpendingBottomSheet {
 	budgetId: string
@@ -50,7 +51,7 @@ export function SpendingBottomSheet({
 	const { isCalculatedBudgetLoading } = useInitialSpendingData(
 		budgetId,
 		date || new Date().toISOString().split('T')[0],
-		reset
+		reset,
 	)
 
 	const { saveSpending, isSaveSpendingPending } = useSaveSpending(
@@ -81,11 +82,11 @@ export function SpendingBottomSheet({
 				exit={{ y: '100%' }}
 				transition={{ duration: 0.3, ease: 'easeInOut' }}
 			>
-				<div className="fixed bg-surface h-dvh top-full left-0 right-0"/>
+				<div className='fixed bg-surface h-dvh top-full left-0 right-0' />
 				<div>
 					<p className='text-2xl font-semibold text-primary-text'>Edit Spending</p>
 					<p className='mt-0.25 text-secondary-text text-base font-semibold'>
-						{(!date || isToday) ? 'Today  • ' + displayDate : displayDate}
+						{!date || isToday ? 'Today  • ' + displayDate : displayDate}
 					</p>
 
 					<form id='spending-form' onSubmit={handleSubmit(onSubmit)} className='mt-1.5'>
@@ -113,7 +114,11 @@ export function SpendingBottomSheet({
 									autoComplete='off'
 									placeholder='0.00'
 									disabled={isSaveSpendingPending}
-									{...register('amount')}
+									{...register('amount', {
+										onChange: (e) => {
+											console.log('onChange:', e.target.value)
+										}
+									})}
 								/>
 							</div>
 

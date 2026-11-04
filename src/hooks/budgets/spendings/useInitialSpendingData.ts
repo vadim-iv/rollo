@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 export function useInitialSpendingData(
 	budgetId: string,
 	date: string,
-	reset: UseFormReset<DailySpendingInput>
+	reset: UseFormReset<DailySpendingInput>,
 ) {
 	const { calculatedBudget, isCalculatedBudgetLoading } = useGetCalculatedBudget(budgetId)
 
