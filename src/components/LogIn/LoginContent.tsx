@@ -131,7 +131,7 @@ export function LoginContent() {
 			</motion.div>
 
 			<motion.div
-				className='flex flex-col h-[70dvh] shadow-box-up border border-border border-b-0 fixed bottom-0 left-0 right-0 bg-surface px-2 pt-6 pb-4  rounded-t-4xl'
+				className='flex flex-col h-[70dvh] w-full max-w-xl left-1/2 -translate-x-1/2  shadow-box-up border border-border border-b-0 fixed bottom-0 bg-surface px-2 pt-6 pb-4  rounded-t-4xl'
 				initial={{ y: '100dvh' }}
 				animate={{ y: 0 }}
 				transition={{

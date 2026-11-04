@@ -75,7 +75,7 @@ export function SpendingBottomSheet({
 				onClick={() => setIsBottomSheetOpen(false)}
 			/>
 			<motion.div
-				className='bg-surface z-60 w-full max-h-30 h-full rounded-t-4xl border border-border border-b-0 px-2 pt-3 pb-4 flex flex-col justify-between'
+				className='bg-surface z-60 w-full max-w-xl max-h-30 h-full rounded-t-4xl border border-border border-b-0 px-2 pt-3 pb-4 flex flex-col justify-between'
 				initial={{ y: '100%' }}
 				animate={{ y: 0 }}
 				exit={{ y: '100%' }}
