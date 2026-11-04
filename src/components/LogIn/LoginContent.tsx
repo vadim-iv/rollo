@@ -107,16 +107,12 @@ export function LoginContent() {
 	return (
 		<>
 			<motion.div
-				className='fixed left-1/2 z-50'
+				className='absolute left-1/2 -translate-x-1/2 z-50'
 				initial={{
-					top: '50%',
-					x: '-50%',
-					y: '-50%'
+					bottom: '50%',
 				}}
 				animate={{
-					top: 'calc(10dvh)',
-					x: '-50%',
-					y: 0
+					bottom: '87.5%',
 				}}
 				transition={{
 					delay: 2,
@@ -135,8 +131,8 @@ export function LoginContent() {
 			</motion.div>
 
 			<motion.div
-				className='fixed inset-x-0 bottom-0 flex h-[75dvh] flex-col shadow-box-up border border-border bg-surface px-2 py-6 rounded-t-4xl'
-				initial={{ y: '100dvh' }}
+				className='flex flex-col h-[90%] shadow-box-up border border-border absolute -bottom-4 -left-2 -right-2 bg-surface px-2 py-6 rounded-t-4xl'
+				initial={{ y: '100%' }}
 				animate={{ y: 0 }}
 				transition={{
 					delay: 2,
