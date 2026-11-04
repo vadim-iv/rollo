@@ -27,7 +27,7 @@ export function BudgetRemainingCard({ totalAmount, days, currency }: IBudgetRema
 				of {displayCurrency} {totalAmount}
 			</p>
 
-			<div className='w-full mt-0.5 h-0.25 bg-border rounded-full'>
+			<div className='w-full mt-0.5 h-0.25 bg-border rounded-full overflow-hidden'>
 				<div className={`transition-[transform,background-color] duration-300 h-full ${isOverBudget ? 'bg-error' : 'bg-accent'} rounded-full origin-left`} style={{ transform: `scaleX(${progress})` }} />
 			</div>
 		</div>

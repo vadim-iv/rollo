@@ -40,7 +40,7 @@ export function BudgetCard({ budget }: IBudgetCard) {
 				<p className='text-secondary-text font-normal text-sm'>Remaining</p>
 				<p className='text-secondary-text font-normal text-sm mt-1'>{statusText}</p>
 
-				<div className='w-full h-0.25 bg-accent-dark rounded-full mt-0.5'>
+				<div className='w-full h-0.25 bg-accent-dark rounded-full mt-0.5 overflow-hidden'>
 					<div className='h-0.25 bg-accent rounded-full' style={{ width: `${progress}%` }} />
 				</div>
 			</div>
