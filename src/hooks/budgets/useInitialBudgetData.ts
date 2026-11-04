@@ -1,7 +1,7 @@
 import { budgetService } from '@/services/budget.service'
 import { UpdateBudgetInput } from '@/validations/budget.validations'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { UseFormReset } from 'react-hook-form'
 
 export function useInitialBudgetData(budgetId: string, reset: UseFormReset<UpdateBudgetInput>) {
@@ -10,11 +10,7 @@ export function useInitialBudgetData(budgetId: string, reset: UseFormReset<Updat
 		queryFn: () => budgetService.getById(budgetId)
 	})
 
-	const initializedKey = useRef<string | null>(null)
-
 	useEffect(() => {
-		const key = budgetId
-		if (!budget || initializedKey.current === key) return
 
 		if (isSuccess && budget) {
 			reset({
@@ -26,8 +22,7 @@ export function useInitialBudgetData(budgetId: string, reset: UseFormReset<Updat
 			})
 		}
 
-		initializedKey.current = key
-	}, [isSuccess, budget, reset, budgetId])
+	}, [isSuccess, budget, reset])
 
 	return { isInitialDataLoading }
 }
