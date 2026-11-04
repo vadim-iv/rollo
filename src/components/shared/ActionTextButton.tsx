@@ -38,7 +38,7 @@ export function ActionTextButton({
 					className="size-2"
 				/>
 			) : (
-				<p>{text}</p>
+				<p className="font-semibold">{text}</p>
 			)}
 		</button>
 	)
