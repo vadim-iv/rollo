@@ -4,12 +4,10 @@ import { PAGES } from '@/config/pages.config'
 import { useLogOut } from '@/hooks/auth/useLogOut'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { toast } from 'sonner';
 
 export function Header() {
 	const { logOut } = useLogOut()
-	const router = useRouter()
 
 	const handleLogOut = () => {
 		const toastId = toast.loading('Logging out...')
@@ -17,8 +15,7 @@ export function Header() {
 		logOut(undefined, {
 			onSuccess: () => {
 				toast.success('Logged out.', { id: toastId })
-				router.replace(PAGES.LOGIN)
-				router.refresh()
+				window.location.replace(PAGES.LOGIN)
 			},
 			onError: () => {
 				toast.error('Could not log out. Try again.', { id: toastId })
