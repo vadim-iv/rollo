@@ -135,7 +135,7 @@ export function LoginContent() {
 			</motion.div>
 
 			<motion.div
-				className='flex flex-col h-[75dvh] shadow-box-up border border-border absolute -bottom-6 -left-2 -right-2 bg-surface px-2 py-6 rounded-t-4xl'
+				className='fixed inset-x-0 bottom-0 flex h-[75dvh] flex-col shadow-box-up border border-border bg-surface px-2 py-6 rounded-t-4xl'
 				initial={{ y: '100dvh' }}
 				animate={{ y: 0 }}
 				transition={{
@@ -226,7 +226,7 @@ export function LoginContent() {
 						<div className='flex items-center gap-0.25'>
 							<Lock className='size-[0.875rem] text-secondary-text' />
 							<p className='text-xs font-normal text-secondary-text'>
-								We'll never share your email with anyone
+								We&apos;ll never share your email with anyone
 							</p>
 						</div>
 						<ActionTextButton
