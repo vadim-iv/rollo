@@ -147,3 +147,12 @@ button:disabled {
     transform: translateY(-0.5rem);
   }
 }
+
+div {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
