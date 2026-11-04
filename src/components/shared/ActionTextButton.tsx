@@ -5,9 +5,11 @@ interface IActionTextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 	text: string
 	isLoading?: boolean
 	className?: string
+	isDirty?: boolean
 }
 
 export function ActionTextButton({
+	isDirty = false,
 	text,
 	isLoading,
 	className,
@@ -20,7 +22,8 @@ export function ActionTextButton({
 			type={type}
 			className={
 				cn(
-					'h-3.5 w-full bg-accent hover:bg-accent-dark transition-colors duration-300 rounded-2xl text-surface text-xl font-semibold flex items-center justify-center outline-0 ring-0',
+					'h-3.5 w-full hover:bg-accent-dark transition-colors duration-300 rounded-2xl text-surface text-xl font-semibold flex items-center justify-center outline-0 ring-0',
+					isDirty ? 'bg-accent-dark' : 'bg-accent',
 					className
 				)
 			}

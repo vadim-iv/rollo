@@ -232,6 +232,7 @@ export function LoginContent() {
 							disabled={isSendingOtp || isLoggingIn}
 							isLoading={isSendingOtp || isLoggingIn}
 							text={step === 'email' ? 'Send code' : 'Join'}
+							isDirty={step === 'email' ? emailForm.formState.isDirty : otpForm.formState.isDirty}
 						/>
 					</div>
 				</div>

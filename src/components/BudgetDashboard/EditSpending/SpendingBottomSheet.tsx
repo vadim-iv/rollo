@@ -37,7 +37,7 @@ export function SpendingBottomSheet({
 		reset,
 		register,
 		handleSubmit,
-		formState: { errors }
+		formState: { errors, isDirty }
 	} = useForm<DailySpendingInput>({
 		resolver: zodResolver(dailySpendingSchema),
 		defaultValues: {
@@ -131,6 +131,7 @@ export function SpendingBottomSheet({
 					type='submit'
 					text='Save changes'
 					isLoading={isSaveSpendingPending || isCalculatedBudgetLoading}
+					isDirty={isDirty}
 				/>
 			</motion.div>
 		</div>

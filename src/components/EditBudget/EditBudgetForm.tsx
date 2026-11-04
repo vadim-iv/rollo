@@ -25,7 +25,7 @@ export function EditBudgetForm({ budgetId }: IEditBudgetForm) {
         reset,
 		handleSubmit,
 		control,
-		formState: { errors }
+		formState: { errors, isDirty }
 	} = useForm<UpdateBudgetInput>({
 		resolver: zodResolver(updateBudgetSchema),
 		defaultValues: {
@@ -76,6 +76,7 @@ export function EditBudgetForm({ budgetId }: IEditBudgetForm) {
 				type='submit'
 				disabled={isUpdateBudgetPending || isInitialDataLoading}
 				isLoading={isUpdateBudgetPending}
+				isDirty={isDirty}
 			/>
 		</form>
 	)

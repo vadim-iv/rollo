@@ -9,17 +9,17 @@ import { CreateBudgetNameInput } from '../shared/BudgetInputs/CreateBudgetNameIn
 import { CreateBudgetAmountInput } from '../shared/BudgetInputs/CreateBudgetAmountInput'
 import { CreateBudgetDateInput } from '../shared/BudgetInputs/CreateBudgetDateInput'
 import { CreateBudgetCurrencyInput } from '../shared/BudgetInputs/CreateBudgetCurrencyInput'
-import { useRouter } from 'next/navigation';
-import { PAGES } from '@/config/pages.config';
+import { useRouter } from 'next/navigation'
+import { PAGES } from '@/config/pages.config'
 
 export function CreateBudgetForm() {
-    const router = useRouter()
+	const router = useRouter()
 
 	const {
 		register,
 		handleSubmit,
 		control,
-		formState: { errors }
+		formState: { errors, dirtyFields }
 	} = useForm<CreateBudgetInput>({
 		resolver: zodResolver(createBudgetSchema),
 		defaultValues: {
@@ -33,6 +33,10 @@ export function CreateBudgetForm() {
 		reValidateMode: 'onChange'
 	})
 
+	const allFieldsAreDirty = (['name', 'amount', 'currency', 'startDate', 'endDate'] as const).every(
+		(field) => dirtyFields[field]
+	)
+
 	const selectedCurrency = useWatch({
 		control,
 		name: 'currency'
@@ -42,10 +46,10 @@ export function CreateBudgetForm() {
 
 	const onSubmit = (data: CreateBudgetInput) => {
 		createBudget(data, {
-            onSuccess: () => {
-                router.push(PAGES.BUDGETS)
-            }
-        })
+			onSuccess: () => {
+				router.push(PAGES.BUDGETS)
+			}
+		})
 	}
 
 	return (
@@ -54,7 +58,7 @@ export function CreateBudgetForm() {
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<div className='flex flex-col gap-1.5 flex-1 min-h-0 overflow-y-auto'>
-				<CreateBudgetNameInput register={register} errors={errors} delay={0}/>
+				<CreateBudgetNameInput register={register} errors={errors} delay={0} />
 				<CreateBudgetAmountInput
 					register={register}
 					errors={errors}
@@ -69,6 +73,7 @@ export function CreateBudgetForm() {
 				type='submit'
 				disabled={isCreateBudgetPending}
 				isLoading={isCreateBudgetPending}
+				isDirty={allFieldsAreDirty}
 			/>
 		</form>
 	)
