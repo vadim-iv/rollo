@@ -31,8 +31,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
 	return (
-		<html lang='en' className={cn('h-full', manrope.variable, 'font-sans')}>
-			<body className='h-dvh m-0 bg-black flex justify-center font-sans'>
+		<html lang='en' className={cn('h-full bg-background', manrope.variable, 'font-sans')}>
+			<body className='h-dvh overscroll-none m-0 bg-background flex justify-center font-sans'>
 				<Providers>
 					<div className='max-w-xl w-full h-full bg-background pt-5 pb-4 px-2'>{children}</div>
 				</Providers>
