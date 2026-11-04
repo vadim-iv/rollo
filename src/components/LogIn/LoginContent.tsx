@@ -140,7 +140,7 @@ export function LoginContent() {
 					ease: [0.1, 0, 0.2, 1]
 				}}
 			>
-				<div className="absolute bg-surface h-dvh top-full left-0 right-0"/>
+				{/* <div className="fixed bg-surface h-dvh top-full left-0 right-0"/> */}
 				<h1 className='font-semibold text-primary-text text-[2rem]'>
 					Welcome to <span className='text-accent'>Rollo</span>
 				</h1>
