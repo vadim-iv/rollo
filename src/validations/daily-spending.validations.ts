@@ -5,8 +5,8 @@ export const dailySpendingSchema = z.object({
         .string({ error: 'What\'s the damage?' })
         .trim()
         .regex(/^-?\d{1,10}(\.\d{1,2})?$/, 'Please enter a valid number with up to 2 decimal places.')
-		.refine((val) => Number(val) > 0, {
-			message: 'Nice try. Your budget needs to be above zero.'
+		.refine((val) => Number(val) >= 0, {
+			message: 'Nice try. Your spending cannot be negative.',
 		})
 		.refine((value) => Number(value) <= 9_999_999.99, "You don't have that much money."),
 })

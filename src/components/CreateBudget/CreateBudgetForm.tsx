@@ -5,12 +5,16 @@ import { CreateBudgetInput, createBudgetSchema } from '@/validations/budget.vali
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, useWatch } from 'react-hook-form'
 import { ActionTextButton } from '../shared/ActionTextButton'
-import { BudgetNameInput } from '../shared/BudgetInputs/BudgetNameInput'
-import { BudgetAmountInput } from '../shared/BudgetInputs/BudgetAmountInput'
+import { CreateBudgetNameInput } from '../shared/BudgetInputs/CreateBudgetNameInput'
+import { CreateBudgetAmountInput } from '../shared/BudgetInputs/CreateBudgetAmountInput'
 import { CreateBudgetDateInput } from '../shared/BudgetInputs/CreateBudgetDateInput'
 import { CreateBudgetCurrencyInput } from '../shared/BudgetInputs/CreateBudgetCurrencyInput'
+import { useRouter } from 'next/navigation';
+import { PAGES } from '@/config/pages.config';
 
 export function CreateBudgetForm() {
+    const router = useRouter()
+
 	const {
 		register,
 		handleSubmit,
@@ -37,8 +41,11 @@ export function CreateBudgetForm() {
 	const { createBudget, isCreateBudgetPending } = useCreateBudget()
 
 	const onSubmit = (data: CreateBudgetInput) => {
-		// createBudget(data)
-		console.log(data)
+		createBudget(data, {
+            onSuccess: () => {
+                router.push(PAGES.BUDGETS)
+            }
+        })
 	}
 
 	return (
@@ -47,14 +54,15 @@ export function CreateBudgetForm() {
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<div className='flex flex-col gap-1.5 flex-1 min-h-0 overflow-y-auto'>
-				<BudgetNameInput register={register} errors={errors} />
-				<BudgetAmountInput
+				<CreateBudgetNameInput register={register} errors={errors} delay={0}/>
+				<CreateBudgetAmountInput
 					register={register}
 					errors={errors}
 					selectedCurrency={selectedCurrency}
+					delay={0.05}
 				/>
-				<CreateBudgetDateInput control={control} errors={errors} />
-				<CreateBudgetCurrencyInput control={control} errors={errors} />
+				<CreateBudgetDateInput control={control} errors={errors} delay={0.1} />
+				<CreateBudgetCurrencyInput control={control} errors={errors} delay={0.15} />
 			</div>
 			<ActionTextButton
 				text='Create Budget'

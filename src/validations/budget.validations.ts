@@ -7,7 +7,7 @@ const budgetObjectSchema = z.object({
 		.string({ error: 'Give your budget a name.' })
 		.trim()
 		.min(1, 'Give your budget a name.')
-		.max(100, "That's a long name for a budget."),
+		.max(15, "That's a long name for a budget."),
 	amount: z
 		.string({ error: 'How much are we working with?' })
 		.min(1, 'How much are we working with?')

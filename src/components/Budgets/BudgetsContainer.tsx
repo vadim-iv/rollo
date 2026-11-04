@@ -8,12 +8,13 @@ import { PAGES } from '@/config/pages.config'
 import { BugetsList } from './BugetsList'
 
 export function BudgetsContainer() {
-    const { budgets, isAllBudgetsError, isAllBudgetsLoading } = useGetAllBudgets()
+	const { budgets, isAllBudgetsError, isAllBudgetsLoading } = useGetAllBudgets()
 	return (
 		<div className='flex-1 min-h-0 flex flex-col gap-2 justify-end mt-2'>
-			<AnimatePresence>
-				{(isAllBudgetsLoading || isAllBudgetsError || !budgets?.length) && (
+			<AnimatePresence mode='wait' initial={false}>
+				{isAllBudgetsLoading || isAllBudgetsError || !budgets?.length ? (
 					<motion.div
+						key='budgets-status'
 						exit={{ y: -10, opacity: 0 }}
 						className='h-full flex flex-col items-center justify-center'
 					>
@@ -31,7 +32,7 @@ export function BudgetsContainer() {
 						{isAllBudgetsError && (
 							<div className='flex flex-col gap-0.5 items-center max-w-15 mt-1.5'>
 								<p className='text-center font-semibold text-[1.125rem] text-primary-text'>
-									Couldn't load budgets
+									Couldn&apos;t load budgets
 								</p>
 								<p className='text-center font-normal text-secondary-text text-base'>
 									Something went wrong while loading your budgets. Please try again.
@@ -49,10 +50,12 @@ export function BudgetsContainer() {
 							</div>
 						)}
 					</motion.div>
+				) : (
+					<motion.div key='budgets-list' className='flex flex-1 min-h-0 flex-col'>
+						<BugetsList budgets={budgets} />
+					</motion.div>
 				)}
 			</AnimatePresence>
-
-			{budgets && budgets.length > 0 && <BugetsList budgets={budgets} />}
 
 			<LinkTextButton text='Create budget' href={PAGES.CREATE_BUDGET} />
 		</div>

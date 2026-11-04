@@ -1,5 +1,5 @@
 import { api } from '@/lib/axios'
-import { BudgetResponse } from '@/types/api-response.types';
+import { BudgetResponse, CalculatedBudgetResponse } from '@/types/api-response.types';
 import { CalculateBudgetInput } from '@/utils/calculations.utils'
 import { CreateBudgetInput, UpdateBudgetInput } from '@/validations/budget.validations'
 
@@ -22,7 +22,7 @@ class BudgetService {
 	}
 
 	async update(budgetId: string, data: UpdateBudgetInput) {
-		const response = await api.put<BudgetResponse>(`${this.BASE_URL}/${budgetId}`, data)
+		const response = await api.patch<BudgetResponse>(`${this.BASE_URL}/${budgetId}`, data)
 		return response.data
 	}
 
@@ -32,7 +32,7 @@ class BudgetService {
 	}
 
 	async getCalculatedBudget(budgetId: string) {
-		const response = await api.get<CalculateBudgetInput>(
+		const response = await api.get<CalculatedBudgetResponse>(
 			`${this.BASE_URL}/${budgetId}/calculated-budget`
 		)
 		return response.data

@@ -1,26 +1,33 @@
 import { budgetService } from '@/services/budget.service'
-import { BudgetFormValues } from '@/validations/budget.validations'
+import { UpdateBudgetInput } from '@/validations/budget.validations'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { UseFormReset } from 'react-hook-form'
 
-export function useInitialBlogData(id: string, reset: UseFormReset<BudgetFormValues>) {
-	const { data : budget, isLoading, isSuccess } = useQuery({
-		queryKey: ['budget', id],
-		queryFn: () => budgetService.getById(id)
+export function useInitialBudgetData(budgetId: string, reset: UseFormReset<UpdateBudgetInput>) {
+	const { data : budget, isLoading: isInitialDataLoading, isSuccess } = useQuery({
+		queryKey: ['budget', budgetId],
+		queryFn: () => budgetService.getById(budgetId)
 	})
 
+	const initializedKey = useRef<string | null>(null)
+
 	useEffect(() => {
+		const key = budgetId
+		if (!budget || initializedKey.current === key) return
+
 		if (isSuccess && budget) {
 			reset({
 				name: budget.name,
 				amount: budget.amount.toString(),
 				currency: budget.currency,
-				startDate: budget.startDate.toISOString().slice(0, 10),
-				endDate: budget.endDate.toISOString().slice(0, 10)
+				startDate: budget.startDate,
+				endDate: budget.endDate
 			})
 		}
-	}, [isSuccess, budget, reset])
 
-	return { isLoading }
+		initializedKey.current = key
+	}, [isSuccess, budget, reset, budgetId])
+
+	return { isInitialDataLoading }
 }

@@ -11,14 +11,15 @@ import { cn } from "cn";
 interface ICreateBudgetCurrencyInput {
     control: Control<CreateBudgetInput>
     errors: FieldErrors<CreateBudgetInput | UpdateBudgetInput>
+    delay?: number
 }
 
-export function CreateBudgetCurrencyInput({ control, errors }: ICreateBudgetCurrencyInput) {
+export function CreateBudgetCurrencyInput({ control, errors, delay = 0 }: ICreateBudgetCurrencyInput) {
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 6 }}
 			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.2, ease: 'easeOut' }}
+			transition={{ duration: 0.2, ease: 'easeOut', delay: delay }}
 		>
 			<label className='font-normal text-primary-text text-base' htmlFor='currency'>
 				Currency

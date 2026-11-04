@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<div className="flex flex-col h-full">
+		<div className='flex flex-col h-full'>
 			<Header />
-      <h1 className="font-semibold text-[2rem] text-primary-text mt-3">Your Budgets</h1>
+			<h1 className='font-semibold text-[2rem] text-primary-text mt-3'>Your Budgets</h1>
 
-      <BudgetsContainer />
+			<BudgetsContainer />
 		</div>
 	)
 }

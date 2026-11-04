@@ -4,16 +4,17 @@ import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import { InputError } from '../InputError'
 
 interface IBudgetNameInput {
-	register: UseFormRegister<CreateBudgetInput | UpdateBudgetInput>
+	register: UseFormRegister<UpdateBudgetInput>
 	errors: FieldErrors<CreateBudgetInput | UpdateBudgetInput>
+    delay?: number
 }
 
-export function BudgetNameInput({ register, errors }: IBudgetNameInput) {
+export function UpdateBudgetNameInput({ register, errors, delay = 0 }: IBudgetNameInput) {
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 6 }}
 			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.2, ease: 'easeOut' }}
+			transition={{ duration: 0.2, ease: 'easeOut', delay: delay }}
 		>
 			<label className='font-normal text-primary-text text-base' htmlFor='budgetName'>
 				Budget name

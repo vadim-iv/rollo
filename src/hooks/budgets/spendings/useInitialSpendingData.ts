@@ -1,7 +1,7 @@
 import { DailySpendingInput } from '@/validations/daily-spending.validations'
 import { UseFormReset } from 'react-hook-form'
 import { useGetCalculatedBudget } from '../useGetCalculatedBudget'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 export function useInitialSpendingData(
 	budgetId: string,
@@ -10,19 +10,19 @@ export function useInitialSpendingData(
 ) {
 	const { calculatedBudget, isCalculatedBudgetLoading } = useGetCalculatedBudget(budgetId)
 
+	const initializedKey = useRef<string | null>(null)
+
 	useEffect(() => {
-		if (!calculatedBudget) return
+		const key = budgetId + ':' + date
+		if (!calculatedBudget || initializedKey.current === key) return
 
-		const spending = calculatedBudget.dailySpendings.find(
-			(dailySpending) => dailySpending.date === date
-		)
-
-		if (!spending) return
+		const spending = calculatedBudget.days.find((day) => day.date === date)
 
 		reset({
-			amount: spending.amount.toString()
+			amount: spending?.spent.toString() || ''
 		})
-	}, [calculatedBudget, date, reset])
+		initializedKey.current = key
+	}, [budgetId, calculatedBudget, date, reset])
 
 	return { isCalculatedBudgetLoading }
 }

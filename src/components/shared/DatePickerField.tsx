@@ -5,7 +5,7 @@ import { Calendar } from '../ui/calendar'
 import { cn } from 'cn'
 
 interface DatePickerFieldProps {
-	value: string
+	value?: string
 	onChange: (value: string) => void
 	placeholder?: string
 	invalid?: boolean
@@ -51,7 +51,7 @@ export function DatePickerField({
 						variant='outline'
 						aria-invalid={invalid}
 						className={cn(
-							'relative h-3.5 border flex-1 rounded-[1rem] py-0 pr-0.25 pl-[2.125rem] flex items-center justify-center transition-none',
+							'relative h-3.5 border flex-1 rounded-2xl py-0 pr-0.25 pl-[2.125rem] flex items-center justify-center transition-none',
 							invalid ? 'border-error' : 'border-border'
 						)}
 					/>

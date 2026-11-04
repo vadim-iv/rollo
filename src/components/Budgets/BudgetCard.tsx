@@ -1,5 +1,7 @@
-import { BudgetResponse } from '@/types/api-response.types';
+import { PAGES } from '@/config/pages.config'
+import { BudgetResponse } from '@/types/api-response.types'
 import { ChevronRight } from 'lucide-react'
+import Link from 'next/link'
 
 interface IBudgetCard {
 	budget: BudgetResponse
@@ -25,23 +27,23 @@ export function BudgetCard({ budget }: IBudgetCard) {
 				: 'Budget expired'
 
 	return (
-		<div className='p-1.5 bg-surface border-border rounded-2xl'>
-			<div className='flex justify-between'>
-				<p className='text-primary-text text-[1.125rem] font-semibold'>{budget.name}</p>
-				<ChevronRight className='size-[1.125rem] text-primary-text' />
-			</div>
+		<Link href={PAGES.getBudgetUrl(budget.id)}>
+			<div className='p-1.5 bg-surface border-border border rounded-2xl'>
+				<div className='flex justify-between'>
+					<p className='text-primary-text text-[1.125rem] font-semibold'>{budget.name}</p>
+					<ChevronRight className='size-[1.125rem] text-primary-text' />
+				</div>
 
-			<p className='text-primary-text font-bold text-2xl mt-1'>
-				{budget.currency} {budget.amount}
-			</p>
-			<p className='text-secondary-text font-normal text-sm'>Remaining</p>
-			<p className='text-secondary-text font-normal text-sm mt-1'>
-				{statusText}
-			</p>
+				<p className='text-primary-text font-bold text-2xl mt-1'>
+					{budget.currency} {budget.amount}
+				</p>
+				<p className='text-secondary-text font-normal text-sm'>Remaining</p>
+				<p className='text-secondary-text font-normal text-sm mt-1'>{statusText}</p>
 
-			<div className='w-full h-0.25 bg-accent-dark rounded-full mt-0.5'>
-				<div className='h-0.25 bg-accent rounded-full' style={{ width: `${progress}%` }} />
+				<div className='w-full h-0.25 bg-accent-dark rounded-full mt-0.5'>
+					<div className='h-0.25 bg-accent rounded-full' style={{ width: `${progress}%` }} />
+				</div>
 			</div>
-		</div>
+		</Link>
 	)
 }

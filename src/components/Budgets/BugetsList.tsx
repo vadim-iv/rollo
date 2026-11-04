@@ -26,10 +26,8 @@ const cardVariants: Variants = {
 		y: 0,
 		scale: 1,
 		transition: {
-			type: 'spring',
-			stiffness: 250,
-			damping: 20,
-			mass: 1
+			duration: 0.2,
+			ease: 'easeInOut'
 		}
 	}
 }

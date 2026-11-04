@@ -5,12 +5,13 @@ import { InputError } from '../InputError'
 import { currencies } from '@/constants/currencies.constants';
 
 interface IBudgetAmountInput {
-	register: UseFormRegister<CreateBudgetInput | UpdateBudgetInput>
+	register: UseFormRegister<UpdateBudgetInput>
 	errors: FieldErrors<CreateBudgetInput | UpdateBudgetInput>
 	selectedCurrency: string
+	delay?: number
 }
 
-export function BudgetAmountInput({ register, errors, selectedCurrency }: IBudgetAmountInput) {
+export function UpdateBudgetAmountInput({ register, errors, selectedCurrency, delay = 0 }: IBudgetAmountInput) {
 	const displayCurrency = (currency: string) => {
 		const foundCurrency = currencies.find((c) => c.value === currency)
 		return foundCurrency?.symbol || foundCurrency?.value || ''
@@ -20,7 +21,7 @@ export function BudgetAmountInput({ register, errors, selectedCurrency }: IBudge
 		<motion.div
 			initial={{ opacity: 0, y: 6 }}
 			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.2, ease: 'easeOut' }}
+			transition={{ duration: 0.2, ease: 'easeOut', delay: delay }}
 		>
 			<label className='font-normal text-primary-text text-base' htmlFor='amount'>
 				Total budget

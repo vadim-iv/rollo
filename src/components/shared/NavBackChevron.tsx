@@ -3,13 +3,17 @@
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export function NavBackChevron() {
+interface INavBackChevron { 
+	path: string
+}
+
+export function NavBackChevron({ path }: INavBackChevron) {
     const router = useRouter()
 
 	return (
 		<button
 			type='button'
-			onClick={() => router.back()}
+			onClick={() => router.push(path)}
 			aria-label='Go back'
 			className='absolute left-0'
 		>

@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
-import { Manrope, Geist } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Manrope } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils'
 
 const manrope = Manrope({
 	variable: '--font-sans',
@@ -16,15 +16,25 @@ export const metadata: Metadata = {
 		template: '%s | Rollo'
 	},
 	description:
-		'Rollo helps you manage your budget day by day. See how much you can spend today, track your spending, and carry unused money forward to future days.'
+		'Rollo helps you manage your budget day by day. See how much you can spend today, track your spending, and carry unused money forward to future days.',
+	applicationName: 'Rollo',
+	appleWebApp: {
+		capable: true,
+		statusBarStyle: 'default',
+		title: 'Rollo'
+	}
+}
+
+export const viewport: Viewport = {
+	themeColor: '#F7F6F2'
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
 	return (
-		<html lang='en' className={cn("h-full", manrope.variable, "font-sans")}>
+		<html lang='en' className={cn('h-full', manrope.variable, 'font-sans')}>
 			<body className='h-dvh m-0 bg-black flex justify-center font-sans'>
 				<Providers>
-					<div className='max-w-xl w-full h-full bg-background pt-5 pb-6 px-3'>{children}</div>
+					<div className='max-w-xl w-full h-full bg-background pt-5 pb-4 px-2'>{children}</div>
 				</Providers>
 			</body>
 		</html>

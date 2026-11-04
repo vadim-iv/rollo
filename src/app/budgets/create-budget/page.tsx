@@ -1,4 +1,5 @@
 import { CreateBudgetForm, Header, NavBackChevron } from '@/components'
+import { PAGES } from '@/config/pages.config';
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -11,8 +12,8 @@ export default function CreateBudgetPage() {
 		<div className='flex flex-col h-full'>
 			<Header />
 			<div className='mt-3 relative flex items-center justify-center'>
-				<NavBackChevron />
-				<h1 className='font-semibold text-[2rem] text-primary-text'>Your Budgets</h1>
+				<NavBackChevron path={PAGES.BUDGETS}/>
+				<h1 className='font-semibold text-[2rem] text-primary-text'>Create Budget</h1>
 			</div>
 
             <CreateBudgetForm />
