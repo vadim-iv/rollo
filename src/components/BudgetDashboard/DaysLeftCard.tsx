@@ -31,8 +31,8 @@ export function DaysLeftCard({ startDateString, endDateString }: IDaysLeftCard) 
 
 			<div className='w-full mt-0.5 h-0.25 bg-border rounded-full overflow-hidden'>
 				<div
-					className={`transition-colors_transform duration-300 h-full ${daysLeft < 0 ? 'bg-error' : 'bg-accent'} rounded-full origin-left`}
-					style={{ transform: `scaleX(${progress}%)` }}
+					className={`transition-[width,background-color] duration-300 h-full ${daysLeft < 0 ? 'bg-error' : 'bg-accent'} rounded-full`}
+					style={{ width: `${progress}%` }}
 				/>
 			</div>
 		</div>

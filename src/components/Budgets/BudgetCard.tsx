@@ -45,7 +45,7 @@ export function BudgetCard({ budget }: IBudgetCard) {
 				<div className='w-full h-0.25 bg-border rounded-full mt-0.5 overflow-hidden'>
 					<div
 						className='h-0.25 bg-accent rounded-full'
-						style={{ transform: `scaleX(${progress}%)` }}
+						style={{ width: `${progress}%` }}
 					/>
 				</div>
 			</div>

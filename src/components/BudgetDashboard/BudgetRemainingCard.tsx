@@ -12,7 +12,7 @@ export function BudgetRemainingCard({ totalAmount, days, currency }: IBudgetRema
 	const amount = Number(totalAmount)
 
 	const isOverBudget = budgetLeft < 0
-	const progress = amount > 0 ? Math.min(Math.max((amount - budgetLeft) / amount, 0), 1) : 0
+	const progress = isOverBudget ? 1 : amount > 0 ? Math.min(Math.max(budgetLeft / amount, 0), 1) : 1
 
 	const displayCurrency = currencies.find((c) => c.value === currency)?.symbol || currency
 	return (
@@ -28,7 +28,7 @@ export function BudgetRemainingCard({ totalAmount, days, currency }: IBudgetRema
 			</p>
 
 			<div className='w-full mt-0.5 h-0.25 bg-border rounded-full overflow-hidden'>
-				<div className={`transition-[transform,background-color] duration-300 h-full ${isOverBudget ? 'bg-error' : 'bg-accent'} rounded-full origin-left`} style={{ transform: `scaleX(${progress})` }} />
+				<div className={`transition-[width,background-color] duration-300 h-full ${isOverBudget ? 'bg-error' : 'bg-accent'} rounded-full`} style={{ width: `${progress * 100}%` }} />
 			</div>
 		</div>
 	)
