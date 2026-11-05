@@ -2,13 +2,14 @@ import { getAuthUser } from '@/lib/auth-user'
 import { prisma } from '@/lib/prisma'
 import { serializeBudget } from '@/utils/budget.utils'
 import { calculateBudget } from '@/utils/calculations.utils'
+import { addDaysToDateString, getDateStringInTimeZone } from '@/utils/date.utils'
 import { NextResponse } from 'next/server'
 
 type RouteContext = {
 	params: Promise<{ budgetId: string }>
 }
 
-export async function GET(_request: Request, context: RouteContext) {
+export async function GET(request: Request, context: RouteContext) {
 	try {
 		const user = await getAuthUser()
 
@@ -57,13 +58,26 @@ export async function GET(_request: Request, context: RouteContext) {
 			}))
 		})
 
-		const today = new Date().toISOString().slice(0, 10)
+		const requestedTimeZone = new URL(request.url).searchParams.get('timeZone') || 'UTC'
+		try {
+			new Intl.DateTimeFormat('en-US', { timeZone: requestedTimeZone })
+		} catch {
+			return NextResponse.json(
+				{
+					error: {
+						code: 'INVALID_TIME_ZONE',
+						message: 'Invalid time zone.'
+					}
+				},
+				{ status: 400 }
+			)
+		}
+
+		const today = getDateStringInTimeZone(new Date(), requestedTimeZone)
 
 		const todaySummary = days.find((day) => day.date === today)
 
-		const tomorrow = new Date(today)
-		tomorrow.setDate(tomorrow.getUTCDate() + 1)
-		const tomorrowDate = tomorrow.toISOString().slice(0, 10)
+		const tomorrowDate = addDaysToDateString(today, 1)
 		const tomorrowSummary = days.find((day) => day.date === tomorrowDate)
 
 		return NextResponse.json({

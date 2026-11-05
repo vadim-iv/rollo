@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { DailyBudget } from '@/utils/calculations.utils'
+import { addDaysToDateString, formatDateOnly, getDateStringInTimeZone } from '@/utils/date.utils'
 import { HistoryCard } from './HistoryCard'
 
 interface IHistoryBottomSheet {
@@ -14,41 +15,22 @@ interface IHistoryBottomSheet {
 export function HistoryBottomSheet({ budgetId, days, currency, setIsBottomSheetOpen }: IHistoryBottomSheet) {
 
 	const toDisplayDate = (date: string) => {
-		const today = new Date()
+		const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+		const today = getDateStringInTimeZone(new Date(), timeZone)
+		const yesterday = addDaysToDateString(today, -1)
+		const tomorrow = addDaysToDateString(today, 1)
 
-		const yesterday = new Date(today)
-		yesterday.setDate(today.getDate() - 1)
-
-		const tomorrow = new Date(today)
-		tomorrow.setDate(today.getDate() + 1)
-
-		if (date === today.toISOString().split('T')[0]) {
-			return `Today  • ${Intl.DateTimeFormat('en-GB', {
-				day: 'numeric',
-				month: 'short',
-				year: 'numeric'
-			}).format(new Date(date))}`
+		if (date === today) {
+			return `Today  • ${formatDateOnly(date)}`
 		}
-		if (date === yesterday.toISOString().split('T')[0]) {
-			return `Yesterday  • ${Intl.DateTimeFormat('en-GB', {
-				day: 'numeric',
-				month: 'short',
-				year: 'numeric'
-			}).format(new Date(date))}`
+		if (date === yesterday) {
+			return `Yesterday  • ${formatDateOnly(date)}`
 		}
-		if (date === tomorrow.toISOString().split('T')[0]) {
-			return `Tomorrow  • ${Intl.DateTimeFormat('en-GB', {
-				day: 'numeric',
-				month: 'short',
-				year: 'numeric'
-			}).format(new Date(date))}`
+		if (date === tomorrow) {
+			return `Tomorrow  • ${formatDateOnly(date)}`
 		}
 
-		return new Intl.DateTimeFormat('en-GB', {
-			day: 'numeric',
-			month: 'short',
-			year: 'numeric'
-		}).format(new Date(date))
+		return formatDateOnly(date)
 	}
 
 	return (

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { SpendingBottomSheet } from '../EditSpending/SpendingBottomSheet'
 import { currencies } from '@/constants/currencies.constants'
 import { useState } from 'react';
+import { getDateStringInTimeZone } from '@/utils/date.utils'
 
 interface IHistoryCard {
 	budgetId: string
@@ -25,7 +26,8 @@ export function HistoryCard({ budgetId, day, currency, displayDate, delay }: IHi
 
 	const progress = Math.min(Math.max(spent / available, 0), 1)
 
-	const isToday = new Date(day.date).toDateString() === new Date().toDateString()
+	const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+	const isToday = day.date === getDateStringInTimeZone(new Date(), timeZone)
 
 	return (
 		<>

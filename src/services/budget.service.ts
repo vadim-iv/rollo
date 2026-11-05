@@ -31,9 +31,10 @@ class BudgetService {
 		return response.data
 	}
 
-	async getCalculatedBudget(budgetId: string) {
+	async getCalculatedBudget(budgetId: string, timeZone: string) {
 		const response = await api.get<CalculatedBudgetResponse>(
-			`${this.BASE_URL}/${budgetId}/calculated-budget`
+			`${this.BASE_URL}/${budgetId}/calculated-budget`,
+			{ params: { timeZone } }
 		)
 		return response.data
 	}
