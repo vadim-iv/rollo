@@ -1,3 +1,4 @@
+// @ts-ignore
 import { describe, expect, test } from 'bun:test'
 import { addDaysToDateString, getDateStringInTimeZone } from '../utils/date.utils'
 
