@@ -1,3 +1,13 @@
+const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24
+
+export function getDaysLeftProgressPercent(startDate: Date, endDate: Date, now: Date): number {
+	const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / MILLISECONDS_PER_DAY) + 1
+	const daysLeft = Math.ceil((endDate.getTime() - now.getTime()) / MILLISECONDS_PER_DAY)
+	const remainingDays = daysLeft + 1
+
+	return totalDays > 0 ? Math.max(0, Math.min((remainingDays / totalDays) * 100, 100)) : 0
+}
+
 export function getDateStringInTimeZone(date: Date, timeZone: string): string {
 	const parts = new Intl.DateTimeFormat('en-CA', {
 		timeZone,

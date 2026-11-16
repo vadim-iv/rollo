@@ -1,5 +1,6 @@
 import { PAGES } from '@/config/pages.config'
 import { BudgetResponse } from '@/types/api-response.types'
+import { getDaysLeftProgressPercent } from '@/utils/date.utils'
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
@@ -16,10 +17,7 @@ export function BudgetCard({ budget }: IBudgetCard) {
 
 	const daysLeft = Math.ceil((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
 
-	const totalDays =
-		Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1
-	const progress =
-		totalDays > 0 ? Math.max(0, Math.min(((totalDays - daysLeft) / totalDays) * 100, 100)) : 0
+	const progress = getDaysLeftProgressPercent(startDate, endDate, now)
 
 	const statusText =
 		daysUntilStart > 0
@@ -39,7 +37,7 @@ export function BudgetCard({ budget }: IBudgetCard) {
 				<p className='text-primary-text font-bold text-2xl mt-1'>
 					{budget.currency} {budget.amount}
 				</p>
-				<p className='text-secondary-text font-normal text-sm'>Remaining</p>
+				<p className='text-secondary-text font-normal text-sm'>Initial budget amount</p>
 				<p className='text-secondary-text font-normal text-sm mt-1'>{statusText}</p>
 
 				<div className='w-full h-0.25 bg-border rounded-full mt-0.5 overflow-hidden'>

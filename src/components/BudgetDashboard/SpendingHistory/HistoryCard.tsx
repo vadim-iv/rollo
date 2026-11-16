@@ -4,7 +4,7 @@ import { DailyBudget } from '@/utils/calculations.utils'
 import { AnimatePresence, motion } from 'motion/react'
 import { SpendingBottomSheet } from '../EditSpending/SpendingBottomSheet'
 import { currencies } from '@/constants/currencies.constants'
-import { useState } from 'react';
+import { useState } from 'react'
 import { getDateStringInTimeZone } from '@/utils/date.utils'
 
 interface IHistoryCard {
@@ -22,9 +22,9 @@ export function HistoryCard({ budgetId, day, currency, displayDate, delay }: IHi
 	const spent = Number(day.spent)
 	const available = Number(day.available)
 
-	const isOverBudget = (spent > available) && available > 0
+	const isOverBudget = spent > available && available > 0
 
-	const progress = Math.min(Math.max(spent / available, 0), 1)
+	const progress = isOverBudget ? 1 : available > 0 ? Math.min(spent / available, 1) : 0
 
 	const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 	const isToday = day.date === getDateStringInTimeZone(new Date(), timeZone)
@@ -46,7 +46,10 @@ export function HistoryCard({ budgetId, day, currency, displayDate, delay }: IHi
 						<span className='text-secondary-text'> / {available.toFixed(2)}</span>
 					</p>
 
-					<p className='text-sm font-semibold text-secondary-text'>{isOverBudget && '>'}{Math.floor(progress * 100)}%</p>
+					<p className='text-sm font-semibold text-secondary-text'>
+						{isOverBudget && '>'}
+						{Math.floor(progress * 100)}%
+					</p>
 				</div>
 
 				<div className='w-full mt-0.5 h-0.25 bg-border rounded-full overflow-hidden'>

@@ -1,3 +1,5 @@
+import { getDaysLeftProgressPercent } from '@/utils/date.utils'
+
 interface IDaysLeftCard {
 	startDateString: string
 	endDateString: string
@@ -12,8 +14,7 @@ export function DaysLeftCard({ startDateString, endDateString }: IDaysLeftCard) 
 
 	const daysLeft = Math.ceil((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
 
-	const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1
-	const progress = totalDays > 0 ? Math.max(0, Math.min(((totalDays - daysLeft) / totalDays) * 100, 100)) : 0
+	const progress = getDaysLeftProgressPercent(startDate, endDate, now)
 
 	return (
 		<div className='w-full mt-1 bg-surface rounded-2xl py-1 px-1.5 border-border border'>
