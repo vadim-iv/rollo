@@ -22,7 +22,7 @@ export function HistoryCard({ budgetId, day, currency, displayDate, delay }: IHi
 	const spent = Number(day.spent)
 	const available = Number(day.available)
 
-	const isOverBudget = spent > available && available > 0
+	const isOverBudget = spent > available
 
 	const progress = isOverBudget ? 1 : available > 0 ? Math.min(spent / available, 1) : 0
 
